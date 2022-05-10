@@ -1,1 +1,1 @@
-# curso-intro-serverless
+# Serverless basic example with DynamoDB

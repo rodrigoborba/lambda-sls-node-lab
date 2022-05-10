@@ -4,13 +4,17 @@
   "description": "",
   "main": "handler.js",
   "dependencies": {
-    "aws-sdk": "^2.724.0"
+    "aws-sdk": "^2.1131.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "serverless-offline": "^6.5.0"
+    "faker": "^5.1.0",
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^8.7.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "fixtures": "./bin/fixtures"
   },
   "keywords": [],
   "author": "",
