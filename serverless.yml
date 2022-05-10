@@ -11,6 +11,16 @@ provider:
   stage: dev
   region: us-east-1
 
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+      Resource: arn:aws:dynamodb:us-east-1:237387733543:table/PACIENTES
+
 functions:
   listarPacientes:
     handler: handler.listarPacientes
@@ -18,9 +28,33 @@ functions:
       - http:
           path: pacientes
           method: get
+
   obterPaciente:
     handler: handler.obterPaciente
     events:
       - http:
           path: pacientes/{pacienteId}
           method: get
+
+  cadastrarPaciente:
+    handler: handler.cadastrarPaciente
+    events:
+      - http:
+          path: pacientes
+          method: post
+
+resources:
+  Resources:
+    PacientesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: PACIENTES
+        AttributeDefinitions:
+          - AttributeName: paciente_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: paciente_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

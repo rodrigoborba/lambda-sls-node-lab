@@ -1,1 +1,1 @@
-# lambda-sls-node-lab
+# curso-intro-serverless
